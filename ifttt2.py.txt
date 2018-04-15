@@ -1,0 +1,24 @@
+# Make a VOIP call to your own mobile through IFTTT
+# You need IFTTT app installed on your device
+# The IFTTT key is: <your_ifttt_ey>
+# curl -X POST -H "Content-Type: application/json" --data @payload2.json https://maker.ifttt.com/trigger/Hook_to_ring/with/key/<your_ifttt_ey>
+# Create a file payload2.json in the same folder with the content: {"value1":100}
+# Note: Json data must use only double quotes in Windows
+
+import requests
+import time
+
+requests.packages.urllib3.disable_warnings()
+url = 'https://maker.ifttt.com/trigger/Hook_to_ring/with/key/<your_ifttt_ey>'
+
+payload = {'value1':'1001'}
+ 
+try:
+    print (payload)
+    requests.get(url, params=payload) 
+except Exception as e:
+    print (e)
+           
+print ('\nDone!')
+ 
+	

@@ -1,0 +1,24 @@
+# upload data to Google Spreadsheets through IFTTT
+# See the spread sheet IFTTT_Webhooks_event under the folder IFTTT in the Google drive of rv 
+# The IFTTT key is: <your_iftt_key>
+# curl -X POST -H "Content-Type: application/json" --data @payload.json https://maker.ifttt.com/trigger/THL_reading_available/with/key/<your_iftt_key>
+# Create a file payload.json in the same folder with the content: {"value1":100, "value2":200, "value3":300}
+# Note: Json data must use only double quotes in Windows
+
+import requests
+import time
+
+requests.packages.urllib3.disable_warnings()
+url = 'https://maker.ifttt.com/trigger/THL_reading_available/with/key/<your_iftt_jey>'
+
+payload = {'value1':'171', 'value2':'172', 'value3':'173'}
+ 
+try:
+    print (payload)
+    requests.get(url, params=payload) 
+except Exception as e:
+    print (e)
+           
+print ('\nDone!')
+ 
+	

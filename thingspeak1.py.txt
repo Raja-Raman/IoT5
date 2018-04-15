@@ -1,0 +1,45 @@
+# upload simulated data to Thingspeak
+# see it at
+# # https://thingspeak.com/channels/<your_channel>/private_show
+
+import requests
+import time
+
+requests.packages.urllib3.disable_warnings()
+url = 'https://api.thingspeak.com/update'
+# Hydro1 channel:
+payload = {'api_key':'<your_key>', 
+        'field1':0, 'field2':0, 'field3':0,
+        'field4':0, 'field5':0, 'field6':0}
+ 
+print ("Press ^C to quit...")
+counter = 0;
+flag = False
+
+while True:
+    try:
+        payload['field1'] += 1
+        payload['field2'] += 2
+        payload['field3'] += 3             
+        payload['field4'] = 0  if flag else  1   
+        payload['field5'] = 1  if flag else  0 
+        payload['field6'] = -1 if flag else  5            
+        requests.get(url, params=payload) 
+        print (payload)
+        counter += 1
+        if (counter==20):
+            counter = 0
+            payload['field1'] = 0
+            payload['field2'] = 0
+            payload['field3'] = 0 
+            payload['field4'] = 0
+            payload['field5'] = 0
+            payload['field6'] = 0             
+        time.sleep(30)   
+        flag = not flag
+    except KeyboardInterrupt:
+        	break
+        	
+print ('\nDone!')
+ 
+	
